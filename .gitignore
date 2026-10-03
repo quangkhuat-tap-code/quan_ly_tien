@@ -1,0 +1,14 @@
+# Chặn thư mục node_modules ở bất cứ đâu
+node_modules/
+*/node_modules/
+
+# Chặn thư mục build
+dist/
+build/
+
+# Chặn file môi trường / bí mật
+.env
+.env.*
+
+# Chặn log rác
+*.log
