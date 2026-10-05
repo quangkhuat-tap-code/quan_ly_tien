@@ -30,11 +30,11 @@ export default function App() {
   const [amount, setAmount] = useState('');
   const [note, setNote] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const API_BASE_URL = 'http://localhost:5000/api';
   // 1. Lấy thông tin ví
   const fetchWallet = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/wallets/1');
+      const res = await axios.get(`${API_BASE_URL}/wallets/1`);
       if (res.data.success) {
         setWallet(res.data.data);
       }
@@ -46,7 +46,7 @@ export default function App() {
   // 2. Lấy danh sách giao dịch
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/transactions');
+      const res = await axios.get(`${API_BASE_URL}/transactions`);
       if (res.data.success) {
         setTransactions(res.data.data);
       }
@@ -72,7 +72,7 @@ export default function App() {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/transactions', {
+      await axios.post(`${API_BASE_URL}/transactions`, {
         amount: Number(amount),
         note: note || 'Không có ghi chú',
         userId: 1,
@@ -96,7 +96,7 @@ export default function App() {
     if (!confirm('Bạn có chắc muốn xóa giao dịch này? Số tiền sẽ được hoàn lại ví.')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/transactions/${id}`);
+      await axios.delete(`${API_BASE_URL}/transactions/${id}`);
       refreshData();
     } catch (error) {
       console.error('Lỗi khi xóa:', error);
